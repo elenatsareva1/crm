@@ -1,0 +1,15 @@
+[data-tooltip-text] {
+    display: inline-block;
+}
+
+.tooltip{
+    position: fixed;
+    left: 0px;
+    top:0px;
+    background-color:#5B46A970;
+    color: white;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 5px;
+    border:1px solid  #5B46A9;
+}

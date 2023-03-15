@@ -81,6 +81,10 @@ function makeClientFromData(data) {
  * @returns {{ id: string, name: string, surname: string, lastName: string, contacts: object[] }[]} Массив клиентов
  */
 function getClientList(params = {}) {
+
+  console.log('getting clients list.. ');
+
+
   const clients = JSON.parse(readFileSync(DB_FILE) || '[]');
   if (params.search) {
     const search = params.search.trim().toLowerCase();
@@ -103,6 +107,9 @@ function getClientList(params = {}) {
  * @returns {{ id: string, name: string, surname: string, lastName: string, contacts: object[], createdAt: string, updatedAt: string }} Объект клиента
  */
 function createClient(data) {
+
+  console.log('creating new client.. ');
+
   const newItem = makeClientFromData(data);
   newItem.id = Date.now().toString();
   newItem.createdAt = newItem.updatedAt = new Date().toISOString();
@@ -205,6 +212,11 @@ module.exports = createServer(async (req, res) => {
         if (req.method === 'GET') return getClientList(queryParams);
         if (req.method === 'POST') {
           const createdItem = createClient(await drainJson(req));
+          
+
+          console.log('createdItem _ ', createdItem);
+          debugger;
+
           res.statusCode = 201;
           res.setHeader('Access-Control-Expose-Headers', 'Location');
           res.setHeader('Location', `${URI_PREFIX}/${createdItem.id}`);

@@ -1,0 +1,111 @@
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  /* padding: 20px; */
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal input {
+  padding: 0.7rem 1rem;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.9em;
+}
+
+.modal__field {
+  display: flex;
+  flex-direction: column;
+  color: #b0b0b0;
+  font-size: 14px;
+  font-weight: 600px;
+  line-height: 19.07px;
+  padding: 0.6rem 1.5rem;
+}
+
+.add-contacts-container{
+  margin: 2rem 0 1rem 0;
+  background-color: #C8C5D170;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.add-contacts-container-header{
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-contacts-container .content {
+  /* display:none; */
+  padding:10px;
+} 
+
+.btn-add-client{
+  width: 147px;
+  height: 44px;
+  background-color: #9873FF;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+.btn-cancel{
+  width: 147px;
+  height: 44px;
+  color: #333333;
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: underline;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+
+
+.contact-type-selector{
+
+}
+
+
