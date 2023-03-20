@@ -14,14 +14,23 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="./modal/modal.css" />
+    <link rel="stylesheet" href="./modal_new_client/modal_new_client.css" />
+    <link
+      rel="stylesheet"
+      href="./modal_update_client/modal_update_client.css"
+    />
     <link rel="stylesheet" href="./tooltip/tooltip.css" />
 
     <script defer src="./index.js"></script>
     <script defer src="./databaseHandler.js"></script>
-    <script defer src="./modal/modal.js"></script>
+    <!-- <script defer src="./modal/modal.js"></script> -->
+
+    <script defer src="./modal_new_client/modal_new_client.js"></script>
+    <script defer src="./modal_update_client/modal_update_client.js"></script>
+
     <script defer src="./tooltip/tooltip.js"></script>
-   
+    <script defer src="./utils.js"></script>
+    <script defer src="./createElements.js"></script>
   </head>
   <body>
     <header class="header">
@@ -59,116 +68,50 @@
         <table class="table">
           <thead class="thead" id="table-header">
             <tr>
-              <th class="thead__text">ID</th>
-              <th class="thead__text">Фамилия Имя Отчество</th>
-              <th class="thead__text">Дата и время создания</th>
-              <th class="thead__text">Последние изменения</th>
+              <th class="thead__text" id="table-header-id">ID</th>
+              <th class="thead__text" id="table-header-name">
+                Фамилия Имя Отчество
+              </th>
+              <th class="thead__text" id="table-header-date-creation">
+                Дата и время создания
+              </th>
+              <th class="thead__text" id="table-header-date-update">
+                Последние изменения
+              </th>
               <th class="thead__text">Контакты</th>
               <th class="thead__text">Действия</th>
             </tr>
           </thead>
           <tbody class="tbody" id="table-body"></tbody>
         </table>
-        <div class="add-clients-container">
-          <button class="btn-primary" id="btn-create-client">
+
+        <div
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <!-- Spinner -->
+          <img
+            src="./assets/vector_spinner.svg"
+            id="loading"
+            class="loading"
+            alt=""
+          />
+        </div>
+        <div class="add-clients-container"></div>
+
+        <div
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <button class="btn-create-client" id="btn-create-client">
+            <img src="./assets/vector_add_contact.svg" alt="Add contact" />
             Добавить клиента
           </button>
         </div>
 
+        <!-- The Create Client Modal -->
+        <div id="show-create-client-modal"></div>
 
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-          <!-- Modal content -->
-          <div class="modal-content">
-            <div class="modal-container">
-              <form action="signup.html" method="post" id="signup">
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 0 1rem;
-                  "
-                >
-                  <div
-                    style="font-size: 18px; font-weight: 700; padding: 1.5rem"
-                  >
-                    Новый клиент
-                  </div>
-                  <span class="close">&times;</span>
-                </div>
-                <div class="modal__field">
-                  <input
-                    type="text"
-                    id="family_name"
-                    name="family_name"
-                    placeholder="Фамилия *"
-                  />
-                  <small style="padding-left: 1rem; color: red"></small>
-                </div>
-                <div class="modal__field">
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Имя * "
-                  />
-                  <small style="padding-left: 1rem; color: red"></small>
-                </div>
-                <div class="modal__field">
-                  <input
-                    type="text"
-                    id="surname"
-                    name="surname"
-                    placeholder="Отчество"
-                  />
-                </div>
-
-                <!-- CONTACTS CONTAINER -->
-                <div class="add-contacts-container">
-
-                </div>
-                  <div
-                    class="add-contacts-container-header"
-                    onclick="expandAcordion()"
-                  >
-                    <img
-                      src="./modal//assets/vector_plus.svg"
-                      alt="gfg-logo"
-                      height="14px"
-                      width="14px"
-                      style=""
-                    />
-                    <span
-                      style="
-                        font-size: 14px;
-                        font-weight: 600;
-                        margin-left: 4px;
-                      "
-                      >Добавить контакт</span
-                    >
-                  </div>
-                <div
-                  style="
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 1rem 0;
-                  "
-                >
-                  <button class="btn-add-client" type="submit">
-                    Сохранить
-                  </button>
-                  <button class="btn-cancel" onclick="cancelAddNewClient()">
-                    Отмена
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+        <!-- The Update Client Modal -->
+        <div id="show-update-client-modal"></div>
       </div>
     </main>
   </body>

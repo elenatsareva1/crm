@@ -198,6 +198,7 @@ module.exports = createServer(async (req, res) => {
   // параметры могут отсутствовать вообще или иметь вид a=b&b=c
   // во втором случае наполняем объект queryParams { a: 'b', b: 'c' }
   if (query) {
+    console.log('query : ', query)
     for (const piece of query.split('&')) {
       const [key, value] = piece.split('=');
       queryParams[key] = value ? decodeURIComponent(value) : '';
