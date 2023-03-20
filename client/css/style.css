@@ -3,7 +3,7 @@ body {
   margin: 0 auto;
   font-family: "Open Sans", sans-serif;
 }
-.main{
+.main {
   display: flex;
   justify-content: center;
 }
@@ -11,7 +11,6 @@ body {
   margin: 0 auto;
   margin: 20px;
   max-width: 984px;
-
 }
 
 .header__container {
@@ -56,7 +55,6 @@ body {
 }
 .table {
   max-width: 984px;
-
 }
 .thead__text {
   padding: 12px;
@@ -65,6 +63,19 @@ body {
   line-height: 16px;
   color: #817c7c;
   text-align: left;
+  gap: 6px;
+}
+
+.arrow-up-and-down{
+  width: 8px;
+  height: 8px;
+  transition: all 1s;
+}
+.turn-around{
+  transform: rotate(180deg) translateX(-5px) ;
+  gap: 6px;
+  transition: all 1s;
+
 }
 
 .tbody {
@@ -93,9 +104,37 @@ body {
   margin-top: 4px;
 }
 
-.add-clients-container{
+.add-clients-container {
   display: flex;
   justify-content: center;
   width: 100%;
   padding: 16px;
 }
+
+.btn-create-client{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  color: rgba(152, 115, 255, 1);
+  border: 1px solid rgba(152, 115, 255, 1);
+  padding: 12px;
+}
+
+/* Spinner */
+
+.loading {
+  height: "24px";
+  width: "24px";
+  -webkit-animation: rotating 2s linear infinite;
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
