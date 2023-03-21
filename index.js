@@ -97,6 +97,7 @@ function getClientList(params = {}) {
         .some(str => str.toLowerCase().includes(search))
     );
   }
+  console.log('clients : ', clients)
   return clients;
 }
 
@@ -138,6 +139,9 @@ function getClient(itemId) {
  * @returns {{ id: string, name: string, surname: string, lastName: string, contacts: object[], createdAt: string, updatedAt: string }} Объект клиента
  */
 function updateClient(itemId, data) {
+  console.log('client updated ', itemId, ' to  ' , data)
+  console.log('itemId : ', itemId )
+  console.log('data : ', data )
   const clients = getClientList();
   const itemIndex = clients.findIndex(({ id }) => id === itemId);
   if (itemIndex === -1) throw new ApiError(404, { message: 'Client Not Found' });
@@ -195,6 +199,8 @@ module.exports = createServer(async (req, res) => {
   const [uri, query] = req.url.substr(URI_PREFIX.length).split('?');
   const queryParams = {};
 
+  console.log('uri is ', uri )
+  console.log('query is ', query )
   // параметры могут отсутствовать вообще или иметь вид a=b&b=c
   // во втором случае наполняем объект queryParams { a: 'b', b: 'c' }
   if (query) {
@@ -208,6 +214,9 @@ module.exports = createServer(async (req, res) => {
   try {
     // обрабатываем запрос и формируем тело ответа
     const body = await (async () => {
+
+      console.log('uri : ', uri )
+
       if (uri === '' || uri === '/') {
         // /api/clients
         if (req.method === 'GET') return getClientList(queryParams);

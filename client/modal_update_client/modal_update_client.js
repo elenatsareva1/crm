@@ -198,12 +198,17 @@ function initUpdateClientModal(client) {
         });
       }
 
+      // remove empty contacts
+      const filteredContacts = contactsFromForm.filter((item)=>{
+        return item.value !== '' && item.type !== ''
+      })
+
       const clientData = {
         id: client.id,
         name: name.value,
         surname: family_name.value,
         lastName: surname.value,
-        contacts: contactsFromForm,
+        contacts: filteredContacts,
       };
       const updatedClient = await updateClientOnDB(clientData);
       console.log("client create :", updatedClient);
@@ -296,7 +301,7 @@ function initUpdateClientModal(client) {
     //save the type of contact in contact array
     sel.addEventListener("change", function (event) {
       const selectedType = event.target.value;
-      contacts[contactIndex].type = selectedType;
+      client.contacts[contactIndex].type = selectedType;
     });
 
     // append the selector on the container
@@ -313,7 +318,7 @@ function initUpdateClientModal(client) {
     //save the value of contact in contact array
     inputValue.addEventListener("change", function (event) {
       const userValue = event.target.value;
-      contacts[contactIndex].value = userValue;
+      client.contacts[contactIndex].value = userValue;
     });
 
     div2.appendChild(inputValue);
