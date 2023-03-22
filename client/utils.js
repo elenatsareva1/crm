@@ -20,7 +20,6 @@ const compareArrays = (a, b) =>
 
 
   /* Dates Utils */
-
   function getUTCfullYear(someDateObj){
 
     const options = {

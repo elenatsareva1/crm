@@ -49,6 +49,7 @@ body {
   line-height: 19px;
   color: #b0b0b0;
   width: 100%;
+  border: 1px solid rgba(51, 51, 51, 0.2);
 }
 .main-title {
   margin-bottom: 10px;
@@ -78,6 +79,12 @@ body {
 }
 
 .table {
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+.tr {
+  border-bottom: 2px solid grey;
+  border-color: grey;
 }
 
 .thead__text {
@@ -85,9 +92,9 @@ body {
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  color: #817c7c;
   text-align: left;
   gap: 6px;
+  color: #b0b0b0;
 }
 
 .thead__text.id {
@@ -106,51 +113,49 @@ body {
 }
 
 .tbody {
-  /*  background-color: #fff; */
-  /* height: 300px; */
 }
 
 .table__tr {
   font-weight: 400;
   height: 60px;
   background-color: white;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .table__tr .td__id {
   color: rgba(176, 176, 176, 1);
   font-size: 12px;
-  padding: 0rem 1rem 0rem 0.7rem;
+  padding: 12px;
 }
 .table__tr .td__name {
   color: rgb(63, 44, 44);
   font-size: 14px;
-  padding: 0rem 1rem 0rem 0.7rem;
+  padding: 12px;
 }
 
 .table__tr .td__createdAt {
   color: rgb(63, 44, 44);
   font-size: 14px;
-  padding: 0rem 1rem 0rem 0.7rem;
-  /*   display: flex;
-  flex-direction: column; */
+  padding: 12px;
 }
 
 .td__updatedAt {
   color: rgb(63, 44, 44);
   font-size: 14px;
-  padding: 0rem 1.5rem 0rem 1.2rem;
-  /* display: flex;
-  flex-direction: column; */
+  padding: 12px;
 }
 
-.td_contacts{
-
-
+.td_contacts {
+  max-width: 104px;
+  padding: 12px;
 }
 
-.td_actions{
- /*  display: flex;
-  align-items: flex-start; */
+.td_actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  padding: 12px;
 }
 
 .flex-column {
@@ -159,7 +164,6 @@ body {
 }
 
 .table__td {
-  /*  border-top: 1px solid #ddd; */
   padding: 12px;
   font-size: 12px;
   color: #564747;
@@ -179,15 +183,13 @@ body {
 .add-clients-container {
   display: flex;
   justify-content: center;
-  /* width: 100%; */
-  padding: 16px;
 }
 
 .btn-actions {
   border: none;
   background-color: inherit;
   font-size: 14px;
-
+  padding: 0;
 }
 .btn-create-client {
   display: flex;
