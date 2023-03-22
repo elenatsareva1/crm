@@ -1,10 +1,8 @@
-
 function initCreateClientModal() {
-  
   const renderCreateClientModal = document.querySelector(
     "#show-create-client-modal"
   );
-  
+
   var template = function (props) {
     return /* html */ `
     <div id="myModal" class="modal-create">
@@ -103,18 +101,18 @@ function initCreateClientModal() {
   // put the html above inside the element
   renderCreateClientModal.innerHTML = template();
 
-// Get elements on the page that needs listeners:
- const openAcordion = document.querySelector('.add-contacts-container-header')
- openAcordion.addEventListener('click', () => expandAcordion())
+  // Get elements on the page that needs listeners:
+  const openAcordion = document.querySelector(".add-contacts-container-header");
+  openAcordion.addEventListener("click", () => expandAcordion());
 
- const btnCancel = document.querySelector('.btn-cancel')
- btnCancel.addEventListener('click', () => cancelAddNewClient())
+  const btnCancel = document.querySelector(".btn-cancel");
+  btnCancel.addEventListener("click", () => cancelAddNewClient());
 
   // Get the modal
   var modal = document.getElementById("myModal");
 
   modal.style.display = "block";
-  
+
   // Get the button that opens the modal
   var btn = document.getElementById("btn-create-client");
 
@@ -199,16 +197,22 @@ function initCreateClientModal() {
         }
       } else {
         contactsFromForm.push({
-          type: form.elements["contact-type"].value,
-          value: form.elements["contact-value"].value,
+          type: form.elements["contact-type"]?.value,
+          value: form.elements["contact-value"]?.value,
         });
       }
+
+      // remove empty or undefined contacts 
+      const filteredContacts = contactsFromForm.filter((item) => {
+        return item.value !== "" && item.value !== undefined && item.type !== "" && item.value !== undefined;
+      });
 
       const clientData = {
         name: name.value,
         surname: family_name.value,
         lastName: surname.value,
-        contacts: contactsFromForm,
+        createdAt: new Date(),
+        contacts: filteredContacts,
       };
       const client = await createClientOnDB(clientData);
       console.log("client create :", client);

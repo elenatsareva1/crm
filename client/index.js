@@ -1,5 +1,3 @@
-
-
 // clients state
 clients = [];
 
@@ -29,36 +27,69 @@ async function printClientsList(clients) {
     tableBody.appendChild(tr);
 
     if (client?.id) {
-      const th = document.createElement("th");
-      th.className = "thead__text";
-      th.innerText = client.id;
-      tr.appendChild(th);
+      const td = document.createElement("td");
+      td.setAttribute("class", "td__id");
+      // td.className = "thead__text";
+      td.innerText = client.id;
+      tr.appendChild(td);
     }
     if (client?.name) {
-      const th = document.createElement("th");
-      th.className = "thead__text";
-      th.innerText = `${client.name} ${client.surname} ${client.lastName}`;
-      tr.appendChild(th);
+      const td = document.createElement("td");
+      td.className = "td__name";
+      td.innerText = `${client.name} ${client.surname} ${client.lastName}`;
+      tr.appendChild(td);
     }
     if (client?.createdAt) {
-      const th = document.createElement("th");
-      th.className = "thead__text";
-      th.innerText = `${new Date(client.createdAt).toDateString()}`;
-      tr.appendChild(th);
+      const td = document.createElement("td");
+      td.className = "td__createdAt";
+
+      const flexboxDiv = document.createElement("div");
+      flexboxDiv.className = "flex-column";
+
+      const spanDate = document.createElement("span");
+      spanDate.innerText = getUTCfullYear(new Date(client.createdAt)).date;
+      const spanHour = document.createElement("span");
+      spanHour.innerText = getUTCfullYear(new Date(client.createdAt)).hour;
+      spanHour.style = "color: rgba(176, 176, 176, 1)";
+
+      flexboxDiv.appendChild(spanDate);
+      flexboxDiv.appendChild(spanHour);
+
+      td.appendChild(flexboxDiv);
+
+      tr.appendChild(td);
     }
     if (client?.updatedAt) {
-      const th = document.createElement("th");
+      /*   const th = document.createElement("th");
       th.className = "thead__text";
       th.innerText = `${new Date(client.updatedAt).toDateString()}`;
-      tr.appendChild(th);
+      tr.appendChild(th); */
+      const td = document.createElement("td");
+      td.className = "td__updatedAt";
+
+      const flexboxDiv = document.createElement("div");
+      flexboxDiv.className = "flex-column";
+
+      const spanDate2 = document.createElement("span");
+      spanDate2.innerText = getUTCfullYear(new Date(client.updatedAt)).date;
+      const spanHour2 = document.createElement("span");
+      spanHour2.innerText = getUTCfullYear(new Date(client.updatedAt)).hour;
+      spanHour2.style = "color: rgba(176, 176, 176, 1)";
+
+      flexboxDiv.appendChild(spanDate2);
+      flexboxDiv.appendChild(spanHour2);
+
+      td.appendChild(flexboxDiv);
+
+      tr.appendChild(td);
     }
     if (client?.contacts) {
-      const th = document.createElement("th");
-      th.className = "thead__text";
+      const td = document.createElement("td");
+      td.className = "td_contacts";
 
       // th.innerText = `${client.contacts}`;
-      const th_div = document.createElement("div");
-      th_div.style.display = "flex";
+      const td_div = document.createElement("div");
+     // td_div.style.display = "flex";
 
       client.contacts.forEach((element) => {
         const icon = document.createElement("img");
@@ -82,35 +113,74 @@ async function printClientsList(clients) {
           icon.src = "./assets/vector_mail.svg";
           icon.setAttribute("data-tooltip-text", element.value);
         }
-        th_div.appendChild(icon);
+        td_div.appendChild(icon);
       });
 
-      th.appendChild(th_div);
-      tr.appendChild(th);
+      td.appendChild(td_div);
+      tr.appendChild(td);
     }
 
-    const actionDiv = document.createElement("div");
-    actionDiv.className = "thead__text";
-    actionDiv.style.display = "flex";
+    const td_actions = document.createElement("td");
+    td_actions.className = "td_actions";
+
+    const actionButtonsDiv = document.createElement("div");
+    actionButtonsDiv.style.display = "flex";
+    actionButtonsDiv.style.flexDirection = "column";
+    actionButtonsDiv.style.alignItems = "flex-start";
+    
+    
 
     // update client button
     const buttonUpdateClient = document.createElement("button");
-    buttonUpdateClient.innerText = "Update";
+    buttonUpdateClient.className = "btn-actions";
+
+    const buttonUpdateClientIcon = document.createElement("img");
+    buttonUpdateClientIcon.setAttribute("src", "./assets/vector_update.svg");
+
+    const buttonUpdateClientSpan = document.createElement("span");
+    buttonUpdateClientSpan.innerText = "Изменить";
+    buttonUpdateClientSpan.style.paddingLeft = '6px';
+    buttonUpdateClientSpan.style.cursor = 'pointer'
+
+
+    buttonUpdateClient.appendChild(buttonUpdateClientIcon);
+    buttonUpdateClient.appendChild(buttonUpdateClientSpan);
+
     buttonUpdateClient.addEventListener("click", () =>
       renderUpdateModal(client)
     );
     buttonUpdateClient.setAttribute("id", "btn-update-client");
 
-    actionDiv.appendChild(buttonUpdateClient);
-    tr.appendChild(actionDiv);
+    actionButtonsDiv.appendChild(buttonUpdateClient);
+
+    td_actions.appendChild(buttonUpdateClient);
+    tr.appendChild(td_actions);
 
     // delete client button
     const buttonDeleteClient = document.createElement("button");
-    buttonDeleteClient.innerText = "Delete";
-    buttonDeleteClient.addEventListener("click", () => deleteClient(client));
+    buttonDeleteClient.className = "btn-actions";
 
-    actionDiv.appendChild(buttonDeleteClient);
-    tr.appendChild(actionDiv);
+    const buttonDeleteClientIcon = document.createElement("img");
+    buttonDeleteClientIcon.setAttribute("src", "./assets/vector_delete.svg");
+
+    const buttonDeleteClientSpan = document.createElement("span");
+    buttonDeleteClientSpan.innerText = "Удалить";
+    buttonDeleteClientSpan.style.paddingLeft = '6px'
+    buttonDeleteClientSpan.style.cursor = 'pointer'
+
+    buttonDeleteClient.appendChild(buttonDeleteClientIcon);
+    buttonDeleteClient.appendChild(buttonDeleteClientSpan);
+
+    buttonDeleteClient.addEventListener("click", () =>
+      deleteClient(client)
+    );
+    buttonDeleteClient.setAttribute("id", "btn-update-client");
+    actionButtonsDiv.appendChild(buttonDeleteClient);
+
+    td_actions.appendChild(actionButtonsDiv);
+
+    tr.appendChild(td_actions);
+
   });
 }
 

@@ -23,10 +23,12 @@ async function createClientOnDB(data) {
 async function updateClientOnDB(client) {
   const url = `http://localhost:3000/api/clients/${client.id}`;
   const data = {
-    id : client.id,
+    //id : client.id,
     name: client.name,
     surname: client.surname,
     lastName: client.lastName,
+    //updatedAt : client.updateAt,
+    //createdAt : client.createdAt,
     contacts : client.contacts,
   }
   const rawResponse = await fetch(url, {

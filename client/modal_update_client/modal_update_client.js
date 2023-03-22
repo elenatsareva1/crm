@@ -25,35 +25,40 @@ function initUpdateClientModal(client) {
                 style="font-size: 18px; font-weight: 700; padding: 1.5rem"
               >
                  Изменить данные
+                 <span style="color: rgba(176, 176, 176, 1); font-size: 12px; font-weight: 400; padding-left: 4px;"> ID: ${client.id}</span>
               </div>
               <span class="close_update_modal">&times;</span>
             </div>
             <div class="modal__field">
+              <label for="family_name" style="padding-left: 16px; font-size: 10px;">Фамилия *</label>
               <input
                 type="text"
                 id="family_name"
                 name="family_name"
-                placeholder="Фамилия *"
+                label="Фамилия *"
+                placeholder = ${client.lastName}
                 value = ${client.lastName}
                 />
                 <small style="padding-left: 1rem; color: red"></small>
                 </div>
                 <div class="modal__field">
+                <label for="name" style="padding-left: 16px; font-size: 10px;">Имя *</label>
                 <input
                 type="text"
                 id="name"
                 name="name"
-                placeholder="Имя * "
+                placeholder=${client.surname}
                 value = ${client.name}
                 />
                 <small style="padding-left: 1rem; color: red"></small>
                 </div>
                 <div class="modal__field">
+                <label for="surname" style="padding-left: 16px; font-size: 10px;">Отчество</label>
                 <input
                 type="text"
                 id="surname"
                 name="surname"
-                placeholder="Отчество"
+                placeholder=${client.surname}
                 value = ${client.surname}
               />
             </div>
@@ -198,12 +203,17 @@ function initUpdateClientModal(client) {
         });
       }
 
+      // remove empty contacts
+      const filteredContacts = contactsFromForm.filter((item)=>{
+        return item.value !== '' && item.type !== ''
+      })
+
       const clientData = {
         id: client.id,
         name: name.value,
         surname: family_name.value,
         lastName: surname.value,
-        contacts: contactsFromForm,
+        contacts: filteredContacts,
       };
       const updatedClient = await updateClientOnDB(clientData);
       console.log("client create :", updatedClient);
@@ -215,14 +225,10 @@ function initUpdateClientModal(client) {
     }
   });
 
-  /*   async function getClients() {
-    const clients = await fetchClientsFromDB();
-    return clients;
-  } */
+
 
   function cancelAddNewClient() {
     closeModal();
-    // contacts = [];
   }
 
   /**
@@ -296,7 +302,7 @@ function initUpdateClientModal(client) {
     //save the type of contact in contact array
     sel.addEventListener("change", function (event) {
       const selectedType = event.target.value;
-      contacts[contactIndex].type = selectedType;
+      client.contacts[contactIndex].type = selectedType;
     });
 
     // append the selector on the container
@@ -313,7 +319,7 @@ function initUpdateClientModal(client) {
     //save the value of contact in contact array
     inputValue.addEventListener("change", function (event) {
       const userValue = event.target.value;
-      contacts[contactIndex].value = userValue;
+      client.contacts[contactIndex].value = userValue;
     });
 
     div2.appendChild(inputValue);
